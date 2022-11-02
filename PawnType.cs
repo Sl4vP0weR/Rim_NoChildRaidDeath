@@ -2,8 +2,10 @@
 
 public enum PawnType
 {
-    Default,
     Child,
+    Colonist,
     Slave,
-    Prisoner
+    Prisoner,
+    Enemy,
+    Other,
 }

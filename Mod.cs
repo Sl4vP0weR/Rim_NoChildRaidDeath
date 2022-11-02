@@ -28,35 +28,23 @@ public sealed class Mod : Verse.Mod
         Settings.Draw(rect);
     }
 
-    public static ChanceSlider GetChance(PawnType type) => type switch
-    {
-        PawnType.Child => Settings.Childs,
-        PawnType.Prisoner => Settings.Prisoners,
-        PawnType.Slave => Settings.Slaves,
-        _ => Settings.Default
-    };
-    public static bool ChanceDeath(PawnType type) => Rand.Chance(GetChance(type).Chance);
-    private static bool ChanceDeath(Pawn pawn)
-    {
-        bool ChanceAlive(bool condition = true, PawnType type = PawnType.Default) => condition && !ChanceDeath(type);
-#if v1_4
-        var isChild = pawn.DevelopmentalStage.HasAny(DevelopmentalStage.Newborn | DevelopmentalStage.Baby | DevelopmentalStage.Child);
-        if (ChanceAlive(isChild, PawnType.Child)) return false;
-#endif
-        if (ChanceAlive(pawn.IsPrisoner, PawnType.Prisoner)) return false;
-        if (ChanceAlive(pawn.IsSlave, PawnType.Slave)) return false;
-        if (ChanceAlive()) return false;
-        return true;
-    }
-    public static bool IsDeathAllowed(Pawn_HealthTracker health)
+    public static float ChanceOfDeath(PawnType type) => Settings.Sliders[type].Chance;
+    public static float GetDeathChance_HealthTracker(Pawn_HealthTracker health)
     {
         var pawn = health.hediffSet.pawn;
-        var result = ChanceDeath(pawn);
-#if DEBUG
-        Log.Clear();
-        Log.TryOpenLogWindow();
-        Log.Message($"{pawn.NameFullColored}: {result}");
+        return GetDeathChance_Injury(pawn);
+    }
+    public static float GetDeathChance_Injury(Pawn pawn)
+    {
+#if v1_4
+        var isChild = pawn.DevelopmentalStage.HasAny(DevelopmentalStage.Newborn | DevelopmentalStage.Baby | DevelopmentalStage.Child);
+        if (isChild) return ChanceOfDeath(PawnType.Child);
 #endif
-        return result;
+        if (pawn.IsColonist) return ChanceOfDeath(PawnType.Colonist);
+        if (pawn.IsPrisoner) return ChanceOfDeath(PawnType.Prisoner);
+        if (pawn.IsSlave) return ChanceOfDeath(PawnType.Slave);
+        if (pawn.HostileTo(Find.FactionManager.OfPlayer)) return ChanceOfDeath(PawnType.Enemy);
+
+        return ChanceOfDeath(PawnType.Other);
     }
 }

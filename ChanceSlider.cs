@@ -2,7 +2,7 @@
 
 public record struct ChanceSlider(PawnType PawnType, FloatRange? ChanceRange = null) : IExposable
 {
-    float chance = 100f;
+    float chance = 0f;
     public float Chance => chance/100f;
     public string TranslatedType => $"{PawnType_Prefix}{PawnType}".Translate();
     public void Draw(Rect rect)

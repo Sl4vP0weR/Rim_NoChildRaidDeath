@@ -3,7 +3,9 @@
 	<Settings_DeathChance>Chance of death on down for {0}: {1}</Settings_DeathChance>
 	<Settings_NotAvailableInGame>Not available while ingame!</Settings_NotAvailableInGame>
 
-	<PawnType_Default>any</PawnType_Default>
+	<PawnType_Other>others</PawnType_Other>
+	<PawnType_Enemy>enemy</PawnType_Enemy>
+	<PawnType_Colonist>colonist</PawnType_Colonist>
 	<PawnType_Child>child</PawnType_Child>
 	<PawnType_Slave>slave</PawnType_Slave>
 	<PawnType_Prisoner>prisoner</PawnType_Prisoner>

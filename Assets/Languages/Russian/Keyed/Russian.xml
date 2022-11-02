@@ -3,7 +3,9 @@
 	<Settings_DeathChance>Шанс смерти при падении {0}: {1}</Settings_DeathChance>
 	<Settings_NotAvailableInGame>Невозможно изменить настройки пока вы в игре!</Settings_NotAvailableInGame>
 
-	<PawnType_Default>любого</PawnType_Default>
+	<PawnType_Other>других</PawnType_Other>
+	<PawnType_Enemy>врага</PawnType_Enemy>
+	<PawnType_Colonist>колониста</PawnType_Colonist>
 	<PawnType_Child>ребёнка</PawnType_Child>
 	<PawnType_Slave>раба</PawnType_Slave>
 	<PawnType_Prisoner>заключённого</PawnType_Prisoner>

@@ -2,11 +2,16 @@
 
 public class ModSettings : Verse.ModSettings
 {
-    public ChanceSlider
-        Default = new(PawnType.Default),
-        Childs = new(PawnType.Child),
-        Slaves = new(PawnType.Slave),
-        Prisoners = new(PawnType.Prisoner);
+    readonly Dictionary<PawnType, ChanceSlider> sliders = new();
+    public IReadOnlyDictionary<PawnType, ChanceSlider> Sliders => sliders;
+
+    readonly static IReadOnlyList<PawnType> pawnTypes = Enum.GetValues(typeof(PawnType)).OfType<PawnType>().ToList();
+
+    public ModSettings()
+    {
+        foreach(var type in pawnTypes)
+            sliders.Add(type, new(type));
+    }
     public Rect ViewRect { get; private set; }
     public void Draw(Rect rect)
     {
@@ -20,22 +25,26 @@ public class ModSettings : Verse.ModSettings
         Listing_Standard listing = new();
 
         listing.Begin(ViewRect);
-        Draw(listing, ref Default);
+        foreach(var type in pawnTypes)
+        {
 #if v1_4
-        if (ModLister.BiotechInstalled)
-            Draw(listing, ref Childs);
+            if (!ModLister.BiotechInstalled)
+                if(type == PawnType.Child)
+                    continue;
 #endif
-        Draw(listing, ref Slaves);
-        Draw(listing, ref Prisoners);
+            sliders[type] = Draw(listing, sliders[type]);
+        }
         listing.End();
     }
-    void Draw(Listing listing, ref ChanceSlider slider) => slider.Draw(listing.GetRect(50));
+    ChanceSlider Draw(Listing listing, ChanceSlider slider)
+    {
+        slider.Draw(listing.GetRect(50));
+        return slider;
+    }
     public override void ExposeData()
     {
         base.ExposeData();
-        Default.ExposeData();
-        Childs.ExposeData();
-        Slaves.ExposeData();
-        Prisoners.ExposeData();
+        foreach (var slider in sliders.Values)
+            slider.ExposeData();
     }
 }
