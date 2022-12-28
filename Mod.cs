@@ -1,11 +1,11 @@
-﻿global using Mod = LivesMatter.Mod;
+﻿global using Mod = DeathTricks.Mod;
 
-namespace LivesMatter;
+namespace DeathTricks;
 
 public sealed class Mod : Verse.Mod
 {
     public static Mod Instance { get; private set; }
-    public static readonly Harmony Harmony = new(nameof(LivesMatter));
+    public static readonly Harmony Harmony = new(nameof(DeathTricks));
     public static ModSettings Settings => Instance.GetSettings<ModSettings>();
     public Mod(ModContentPack content) : base(content)
     {
@@ -16,12 +16,12 @@ public sealed class Mod : Verse.Mod
         try
         {
             Harmony.PatchAll();
-            Log.Message($"{nameof(LivesMatter)} patched successfully...");
+            Log.Message($"{nameof(DeathTricks)} patched successfully...");
         }
         catch (Exception ex) { Log.Error(ex + ""); }
     }
 
-    public override string SettingsCategory() => nameof(LivesMatter);
+    public override string SettingsCategory() => nameof(DeathTricks);
     public override void DoSettingsWindowContents(Rect rect)
     {
         base.DoSettingsWindowContents(rect);

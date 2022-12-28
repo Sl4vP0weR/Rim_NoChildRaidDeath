@@ -1,4 +1,4 @@
-﻿namespace LivesMatter;
+﻿namespace DeathTricks;
 
 public enum PawnType
 {

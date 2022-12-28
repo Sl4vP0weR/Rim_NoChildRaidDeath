@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Elements", "Soluti
 		Shared.mod.props.csproj = Shared.mod.props.csproj
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivesMatter", "LivesMatter.csproj", "{B86F2CC9-9ED6-4C93-92A6-315E52A8AE30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeathTricks", "DeathTricks.csproj", "{B86F2CC9-9ED6-4C93-92A6-315E52A8AE30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

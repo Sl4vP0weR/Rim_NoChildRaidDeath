@@ -1,4 +1,4 @@
-﻿namespace LivesMatter;
+﻿namespace DeathTricks;
 
 public class ModSettings : Verse.ModSettings
 {
@@ -9,7 +9,7 @@ public class ModSettings : Verse.ModSettings
 
     public ModSettings()
     {
-        foreach(var type in pawnTypes)
+        foreach (var type in pawnTypes)
             sliders.Add(type, new(type));
     }
     public Rect ViewRect { get; private set; }
@@ -25,7 +25,7 @@ public class ModSettings : Verse.ModSettings
         Listing_Standard listing = new();
 
         listing.Begin(ViewRect);
-        foreach(var type in pawnTypes)
+        foreach (var type in pawnTypes)
         {
 #if v1_4
             if (!ModLister.BiotechInstalled)
